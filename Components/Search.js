@@ -6,7 +6,7 @@ class Search extends React.Component {
         return (
             <View style={ styles.main_container }>
                 <TextInput style={ styles.textinput } placeHolder="Titre du film" />
-                <Button style={{ height: 50 }} title="Rechercher" onPress={() => {}} />
+                <Button title="Rechercher" onPress={() => {}} />
             </View>
         )
     }

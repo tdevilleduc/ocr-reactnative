@@ -1,3 +1,5 @@
+// Components/Search.js
+
 import React from 'react'
 import { StyleSheet, View, TextInput, Button, FlatList, ActivityIndicator } from 'react-native'
 import FilmItem from './FilmItem'
@@ -55,6 +57,10 @@ class Search extends React.Component {
         }) 
     }
 
+    _displayDetailForFilm = (idFilm) => {
+        this.props.navigation.navigate("FilmDetail", { idFilm: idFilm })
+    }
+
   render() {
     return (
         <View style={styles.main_container}>
@@ -71,7 +77,7 @@ class Search extends React.Component {
                         this._loadFilms()
                     }
                 }}
-                renderItem={({item}) => <FilmItem film={item}/>}
+                renderItem={({item}) => <FilmItem film={item} displayDetailForFilm={this._displayDetailForFilm} />}
             />
             {this._displayLoad()}
         </View>

@@ -33,7 +33,7 @@ class Search extends React.Component {
         }
     }
 
-    _displayLoad() {
+    _displayLoading() {
         if (this.state.isLoading) {
             return (
             <View style={styles.loading_container}>
@@ -79,7 +79,7 @@ class Search extends React.Component {
                 }}
                 renderItem={({item}) => <FilmItem film={item} displayDetailForFilm={this._displayDetailForFilm} />}
             />
-            {this._displayLoad()}
+            {this._displayLoading()}
         </View>
     )
   }

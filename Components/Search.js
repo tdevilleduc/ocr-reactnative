@@ -16,26 +16,6 @@ class Search extends React.Component {
         }
     }
 
-    // _fusionFilms(array) {
-    //     var newArray = this.state.films.slice(0)
-    //     array.map((item) => {
-    //         if (this._isPresentInStateFilms(item) !== true) {
-    //             newArray.push(item)
-    //         }
-    //     })
-    //     return newArray;
-    // }
-
-    // _isPresentInStateFilms(film) {
-    //     var isPresent = false
-    //     this.state.films.map((item) => {
-    //         if (item.id == film.id) {
-    //             isPresent = true
-    //         }
-    //     })
-    //     return isPresent 
-    // }
-
     _loadFilms() {
         this.setState({ isLoading: true })
         if (this.searchedText.length > 0) {
@@ -44,8 +24,6 @@ class Search extends React.Component {
                     this.totalPages = data.total_pages
                     this.setState({ 
                         films: [...this.state.films, ...data.results],
-                        //films: [ ...new Set([...this.state.films, ...data.results])],
-                        //films: this._fusionFilms(data.results),
                         isLoading: false 
                     })
                 }

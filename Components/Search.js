@@ -81,8 +81,7 @@ class Search extends React.Component {
 
 const styles = StyleSheet.create({
     main_container: {
-        flex: 1,
-        marginTop: 20
+        flex: 1
     },
     textinput: {
         marginLeft: 5,

@@ -2,10 +2,8 @@
 
 import React from 'react'
 import { StyleSheet, View, TextInput, Button, FlatList, ActivityIndicator } from 'react-native'
-import FilmItem from './FilmItem'
 import FilmList from './FilmList'
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi' 
-import { connect } from 'react-redux'
 
 
 class Search extends React.Component {
@@ -77,6 +75,7 @@ class Search extends React.Component {
                 loadFilms={this._loadFilms}
                 page={this.page}
                 totalPages={this.totalPages}
+                favoriteList={false}
             />
             {this._displayLoading()}
         </View>

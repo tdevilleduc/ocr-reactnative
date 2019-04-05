@@ -1,8 +1,7 @@
 // Components/Search.js
 
 import React from 'react'
-import { StyleSheet, View, TextInput, Button, Text, FlatList, ActivityIndicator } from 'react-native'
-import FilmItem from './FilmItem'
+import { StyleSheet, SafeAreaView, TextInput, Button, Text, FlatList, ActivityIndicator } from 'react-native'
 import FilmList from './FilmList'
 import { getFilmsFromApiWithSearchedText } from '../API/TMDBApi'
 
@@ -55,16 +54,16 @@ class Search extends React.Component {
   _displayLoading() {
     if (this.state.isLoading) {
       return (
-        <View style={styles.loading_container}>
+        <SafeAreaView style={styles.loading_container}>
           <ActivityIndicator size='large' />
-        </View>
+        </SafeAreaView>
       )
     }
   }
 
   render() {
     return (
-      <View style={styles.main_container}>
+      <SafeAreaView style={styles.main_container}>
         <TextInput
           style={styles.textinput}
           placeholder='Titre du film'
@@ -81,7 +80,7 @@ class Search extends React.Component {
           favoriteList={false}
         />
         {this._displayLoading()}
-      </View>
+      </SafeAreaView>
     )
   }
 }

@@ -27,7 +27,7 @@ class FilmList extends React.Component {
                 onEndReachedThreshold={0.5}
                 onEndReached={() => {
                     if (this.props.page < this.props.totalPages) {
-                        this.props._loadFilms()
+                        this.props.loadFilms()
                     }
                 }}
                 renderItem={({item}) => 

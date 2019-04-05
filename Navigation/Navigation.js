@@ -1,65 +1,68 @@
-// Navigation/Navigation.js
+// Navigation/Navigations.js
 
 import React from 'react'
-import { StyleSheet, Image} from 'react-native'
+import { StyleSheet, Image } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator, createAppContainer } from 'react-navigation'
 import Search from '../Components/Search'
 import FilmDetail from '../Components/FilmDetail'
 import Favorites from '../Components/Favorites'
 
 const SearchStackNavigator = createStackNavigator({
-  Search: { 
+  Search: {
     screen: Search,
     navigationOptions: {
       title: 'Rechercher'
     }
   },
   FilmDetail: {
-      screen: FilmDetail
+    screen: FilmDetail
   }
 })
 
 const FavoritesStackNavigator = createStackNavigator({
-  Favorites: { 
+  Favorites: {
     screen: Favorites,
     navigationOptions: {
       title: 'Favoris'
     }
   },
   FilmDetail: {
-      screen: FilmDetail
+    screen: FilmDetail
   }
 })
 
-const MoviesTabNavigator = createBottomTabNavigator({
-  Search: {
-    screen: SearchStackNavigator,
-    navigationOptions: {
-      tabBarIcon: () => {
-        return <Image
-          source={require('../Images/ic_search.png')}
-          style={styles.icon} />
+const MoviesTabNavigator = createBottomTabNavigator(
+  {
+    Search: {
+      screen: SearchStackNavigator,
+      navigationOptions: {
+        tabBarIcon: () => {
+          return <Image
+            source={require('../Images/ic_search.png')}
+            style={styles.icon}/>
+        }
+      }
+    },
+    Favorites: {
+      screen: FavoritesStackNavigator,
+      navigationOptions: {
+        tabBarIcon: () => {
+          return <Image
+            source={require('../Images/ic_favorite.png')}
+            style={styles.icon}/>
+        }
       }
     }
   },
-  Favorites: {
-    screen: FavoritesStackNavigator,
-    navigationOptions: {
-      tabBarIcon: () => {
-        return <Image
-          source={require('../Images/ic_favorite.png')}
-          style={styles.icon} />
-      }
+  {
+    tabBarOptions: {
+      activeBackgroundColor: '#DDDDDD',
+      inactiveBackgroundColor: '#FFFFFF',
+      showLabel: false,
+      showIcon: true
     }
   }
-}, {
-  tabBarOptions: {
-    showLabel: false,
-    showIcon: true,
-    activeBackgroundColor: '#DDDDDD',
-    inactiveBackgroundColor: '#FFFFFF'
-  }
-})
+)
 
 const styles = StyleSheet.create({
   icon: {

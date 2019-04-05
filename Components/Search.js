@@ -22,8 +22,8 @@ class Search extends React.Component {
     }
 
     _loadFilms() {
-        this.setState({ isLoading: true })
         if (this.searchedText.length > 0) {
+            this.setState({ isLoading: true })
             getFilmsFromApiWithSearchedText(this.searchedText, this.page+1).then(data => {
                     this.page = data.page
                     this.totalPages = data.total_pages

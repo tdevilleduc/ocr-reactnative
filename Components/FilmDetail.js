@@ -8,12 +8,37 @@ import numeral from 'numeral'
 import { connect } from 'react-redux'
 
 class FilmDetail extends React.Component {
+
+  static navigationOptions = ({ navigation }) => {
+    const { params } = navigation.state
+    if (params.film != undefined && Platform.OS === 'ios') {
+      return {
+        headerRight: <TouchableOpacity
+                        style={styles.share_touchable_headerrightbutton}
+                        onPress={() => params.shareFilm()}>
+                        <Image
+                          style={styles.share_image}
+                          source={require('../Images/ic_share.png')} />
+                      </TouchableOpacity>
+      }
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {
       film: undefined,
       isLoading: false
     }
+
+    this._shareFilm = this._shareFilm.bind(this)
+  }
+
+  _updateNavigationParams() {
+    this.props.navigation.setParams({
+      shareFilm: this._shareFilm,
+      film: this.state.film
+    })
   }
 
   componentDidMount() {
@@ -21,7 +46,7 @@ class FilmDetail extends React.Component {
     if (favoriteFilmIndex !== -1) {
       this.setState({
         film: this.props.favoritesFilm[favoriteFilmIndex]
-      })
+      }, () => { this._updateNavigationParams() })
       return
     }
 
@@ -31,7 +56,7 @@ class FilmDetail extends React.Component {
         film: data,
         isLoading: false
       })
-    })
+    }, () => { this._updateNavigationParams() })
   }
 
   _displayLoading() {
@@ -190,6 +215,9 @@ const styles = StyleSheet.create({
   share_image: {
     width: 30,
     height: 30
+  },
+  share_touchable_headerrightbutton: {
+    marginRight: 8
   }
 })
 

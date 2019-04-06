@@ -3,25 +3,10 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity, Animated, Dimensions } from 'react-native'
 import { getImageFromApi } from '../API/TMDBApi' 
+import FadeIn from '../Animations/FadeIn'
 
 class FilmItem extends React.Component {
   
-  constructor(props) {
-    super(props)
-    this.state = {
-      positionLeft: new Animated.Value(Dimensions.get('window').width)
-    }
-  }
-
-  componentDidMount() {
-    Animated.spring(
-      this.state.positionLeft,
-      {
-        toValue: 0
-      }
-    ).start()
-  }
-
   _displayFavoriteImage() {
     if (this.props.isFilmFavorite) {
       return (
@@ -37,7 +22,7 @@ class FilmItem extends React.Component {
     const {film, displayDetailForFilm} = this.props
 
     return (
-      <Animated.View style={{left: this.state.positionLeft}}>
+      <FadeIn>
         <TouchableOpacity 
           onPress={() => displayDetailForFilm(film.id)}
           style={styles.main_container}>
@@ -59,7 +44,7 @@ class FilmItem extends React.Component {
             </View>
           </View>
         </TouchableOpacity>
-      </Animated.View>
+      </FadeIn>
     )
   }
 }

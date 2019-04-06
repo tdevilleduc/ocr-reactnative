@@ -5,10 +5,14 @@ import { StyleSheet, View } from 'react-native'
 
 class Test extends React.Component {
 
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <View style={styles.main_container}>
-        <View style={styles.subview_container}>
+        <View style={styles.animation_view}>
         </View>
       </View>
     )
@@ -21,8 +25,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  subview_container: {
-    
+  animation_view: {
+    backgroundColor: 'red',
+    width: 100,
+    height: 100
   }
 })
 

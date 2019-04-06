@@ -1,5 +1,5 @@
 import React from 'react'
-import {Animated} from 'react-native'
+import { Animated } from 'react-native'
 
 
 class EnlargeShrink extends React.Component {
@@ -7,32 +7,30 @@ class EnlargeShrink extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            width: new Animated.Value(40),
-            height: new Animated.Value(40)
+            viewSize: new Animated.Value(this._getSize())
         }
     }
 
+    _getSize() {
+        if (this.props.shouldEnlarge) {
+            return 80
+        }
+        return 40
+    }
+
     componentDidUpdate() {
-        Animated.parallel([
             Animated.spring(
-                this.state.width,
+                this.state.viewSize,
                 {
-                    toValue: 80
+                    toValue: this._getSize()
                 }
-            ),
-            Animated.spring(
-                this.state.height,
-                {
-                    toValue: 80
-                }
-            )
-        ]).start()
+            ).start()
     }
 
     render() {
         return(
             <Animated.View 
-                style={{width: this.state.width, height: this.state.height}}>
+                style={{width: this.state.viewSize, height: this.state.viewSize}}>
                 {this.props.children}
             </Animated.View>
         )

@@ -77,11 +77,14 @@ class FilmDetail extends React.Component {
 
   _displayFavoriteImage() {
     var sourceImage = require('../Images/ic_favorite_border.png')
+    var shouldEnlarge = false
     if (this.props.favoritesFilm.findIndex(item => item.id === this.state.film.id) !== -1) {
       sourceImage = require('../Images/ic_favorite.png')
+      shouldEnlarge = true
     }
     return (
-      <EnlargeShrink>
+      <EnlargeShrink
+        shouldEnlarge={shouldEnlarge}>
         <Image
           source={sourceImage}
           style={styles.favorite_image}

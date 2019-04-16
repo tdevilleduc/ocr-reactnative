@@ -29,7 +29,8 @@ class FilmDetail extends React.Component {
     super(props)
     this.state = {
       film: undefined,
-      isLoading: false
+      isLoading: false,
+      isSeen: false
     }
 
     this._shareFilm = this._shareFilm.bind(this)
@@ -148,13 +149,24 @@ class FilmDetail extends React.Component {
 
   _addToSeenMovies() {
     const { film } = this.state
+    this.setState({ isSeen: !this.state.isSeen })
+  }
+
+  _displayAddToSeenButtonLabel() {
+    let message = 'Marquer comme vu'
+    if (this.state.isSeen) {
+      message = 'Non vu'
+    }
+    return(
+      message
+    )
   }
 
   _displayFloatingAddToSeenButton() {
     return(
       <Button 
         style={styles.addtoseenmovies_floatingbutton} 
-        title='Marquer comme vu' 
+        title={this._displayAddToSeenButtonLabel()} 
         onPress={() => this._addToSeenMovies()} 
       />
     )

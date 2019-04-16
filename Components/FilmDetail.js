@@ -1,7 +1,7 @@
 // Components/FilmDetail.js
 
 import React from 'react'
-import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image, TouchableOpacity, Share, Platform } from 'react-native'
+import { StyleSheet, View, Text, ActivityIndicator, ScrollView, Image, TouchableOpacity, Share, Platform, Button } from 'react-native'
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi'
 import moment from 'moment'
 import numeral from 'numeral'
@@ -146,11 +146,26 @@ class FilmDetail extends React.Component {
     }
   }
 
+  _addToSeenMovies() {
+    const { film } = this.state
+  }
+
+  _displayFloatingAddToSeenButton() {
+    return(
+      <Button 
+        style={styles.addtoseenmovies_floatingbutton} 
+        title='Marquer comme vu' 
+        onPress={() => this._addToSeenMovies()} 
+      />
+    )
+  }
+
   render() {
     return (
       <View style={styles.main_container}>
         {this._displayLoading()}
         {this._displayFilm()}
+        {this._displayFloatingAddToSeenButton()}
         {this._displayFloatingActionButton()}
       </View>
     )
@@ -225,6 +240,11 @@ const styles = StyleSheet.create({
   },
   share_touchable_headerrightbutton: {
     marginRight: 8
+  },
+  addtoseenmovies_floatingbutton: {
+    position: 'absolute',
+    height: 60,
+    bottom: 0
   }
 })
 

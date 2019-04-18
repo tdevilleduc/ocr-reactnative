@@ -170,6 +170,8 @@ class FilmDetail extends React.Component {
   }
 
   _displayFloatingAddToSeenButton() {
+    const { film } = this.state
+    if (film != undefined) {
     return(
       <Button 
         style={styles.addtoseenmovies_floatingbutton} 
@@ -177,6 +179,7 @@ class FilmDetail extends React.Component {
         onPress={() => this._toggleSeenMovies()} 
       />
     )
+    }
   }
 
   render() {

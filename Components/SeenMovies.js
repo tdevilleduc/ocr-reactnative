@@ -1,6 +1,9 @@
 
 import React from 'react'
-import { StyleSheet, View, ActivityIndicator } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+import { connect } from 'react-redux'
+import FilmList from './FilmList'
+
 
 
 class SeenMovies extends React.Component {
@@ -8,27 +11,22 @@ class SeenMovies extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            films: [],
             isLoading: true
-        }
-    }
-
-    _displayLoading() {
-        if (this.state.isLoading) {
-            return (
-            <View style={styles.loading_container}>
-                <ActivityIndicator size='large' />
-            </View>
-            )
         }
     }
 
     render() {
         return (
-          <View style={styles.main_container}>
-            {this._displayLoading()}
-          </View>
+            <View style={styles.main_container}>
+            <FilmList
+                films={this.props.seenMoviesFilm}
+                navigation={this.props.navigation}
+                favoriteList={false}
+            />
+            </View>
         )
-      }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -46,4 +44,9 @@ const styles = StyleSheet.create({
     }
 })
 
-export default SeenMovies
+const mapStateToProps = (state) => {
+    return {
+      seenMoviesFilm: state.toggleSeenMovies.seenMoviesFilm
+    }
+  }
+  export default connect(mapStateToProps)(SeenMovies)

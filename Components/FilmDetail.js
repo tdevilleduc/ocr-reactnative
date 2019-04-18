@@ -147,8 +147,9 @@ class FilmDetail extends React.Component {
     }
   }
 
-  _addToSeenMovies() {
-    const { film } = this.state
+  _toggleSeenMovies() {
+    const action = { type: "TOGGLE_SEEN", value: this.state.film }
+    this.props.dispatch(action)
     this.setState({ isSeen: !this.state.isSeen })
   }
 
@@ -167,7 +168,7 @@ class FilmDetail extends React.Component {
       <Button 
         style={styles.addtoseenmovies_floatingbutton} 
         title={this._displayAddToSeenButtonLabel()} 
-        onPress={() => this._addToSeenMovies()} 
+        onPress={() => this._toggleSeenMovies()} 
       />
     )
   }
@@ -262,7 +263,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   return {
-    favoritesFilm: state.toggleFavorite.favoritesFilm
+    favoritesFilm: state.toggleFavorite.favoritesFilm,
+    seenMoviesFilm: state.toggleSeenMovies.seenMoviesFilm
   }
 }
 export default connect(mapStateToProps)(FilmDetail)

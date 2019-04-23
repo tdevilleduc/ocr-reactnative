@@ -1,7 +1,7 @@
 // Components/TitleList.js
 
 import React from 'react'
-import { StyleSheet, FlatList, Text, View, Image } from 'react-native'
+import { StyleSheet, FlatList, Text, View, Image, TouchableOpacity } from 'react-native'
 import { getImageFromApi } from '../API/TMDBApi' 
 import { connect } from 'react-redux'
 
@@ -14,7 +14,10 @@ class TitleList extends React.Component {
         }
     }
 
-    
+    _displayDetailForFilm(idFilm) {
+      this.props.navigation.navigate('FilmDetail', {idFilm: idFilm})
+    }
+
     render() {
         return (
             <FlatList 
@@ -22,13 +25,15 @@ class TitleList extends React.Component {
                 data={this.props.films}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({item}) => (
-                    <View style={styles.item_container}>
+                    <TouchableOpacity 
+                        onPress={() => this._displayDetailForFilm(item.id)}
+                        style={styles.item_container}>
                         <Image style={styles.image_film} 
                             source={{uri: getImageFromApi(item.poster_path) }} />
                         <View style={styles.text_container}>    
                             <Text styme={styles.text}>{item.title}</Text>
                         </View>
-                    </View>
+                    </TouchableOpacity>
                 )}
             />
         )

@@ -2,7 +2,7 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
-import FilmList from './FilmList'
+import TitleList from './TitleList'
 
 
 
@@ -19,10 +19,9 @@ class SeenMovies extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-            <FilmList
+            <TitleList
                 films={this.props.seenMoviesFilm}
                 navigation={this.props.navigation}
-                favoriteList={false}
             />
             </View>
         )

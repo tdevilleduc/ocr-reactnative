@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View, Text, Image } from 'react-native'
 import { getImageFromApi } from '../API/TMDBApi' 
+import moment from 'moment'
 
 class TitleItem extends React.Component {
 
@@ -14,7 +15,7 @@ class TitleItem extends React.Component {
     _getItemText() {
         let itemText = this.props.film.title
         if ( ! this.state.isTitle ) {
-            itemText = this.props.film.release_date
+            itemText = 'Sorti le ' + moment(new Date(this.props.film.release_date)).format('DD/MM/YYYY')
         }
         return itemText
     }

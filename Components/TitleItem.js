@@ -4,8 +4,23 @@ import { getImageFromApi } from '../API/TMDBApi'
 
 class TitleItem extends React.Component {
 
+    constructor(props) {
+        super(props)
+        this.state = {
+          isTitle: true
+        }
+    }
+
     _getItemText() {
-        return this.props.film.title
+        let itemText = this.props.film.title
+        if ( ! this.state.isTitle ) {
+            itemText = this.props.film.release_date
+        }
+        return itemText
+    }
+
+    _longPressAction() {
+        this.setState({ isTitle: !this.state.isTitle })
     }
 
     render() {
@@ -14,11 +29,12 @@ class TitleItem extends React.Component {
         return (
             <TouchableOpacity 
                 onPress={() => displayDetailForFilm(film.id)}
+                onLongPress={() => this._longPressAction()}
                 style={styles.item_container}>
                     <Image style={styles.image_film} 
                         source={{uri: getImageFromApi(film.poster_path) }} />
                     <View style={styles.text_container}>    
-                        <Text styme={styles.text}>{this._getItemText(film.id)}</Text>
+                        <Text style={styles.text}>{this._getItemText()}</Text>
                     </View>
             </TouchableOpacity>
         )
@@ -44,7 +60,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
         flexWrap: 'wrap',
         paddingRight: 5
     }
